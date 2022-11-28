@@ -1,27 +1,24 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from "react";
+import StartScreen from "./components/StartScreen";
+import QuizScreen from "./components/QuizScreen";
 
 function App() {
+  const [isStart, setStart] = useState(true);
+
+  const onStartQuiz = () => {
+    setStart((prevState) => !prevState);
+  };
+
+  const onFinishQuiz = () => {
+    setStart((prevState) => !prevState);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit
-          {' '}
-          <code>src/App.js</code>
-          {' '}
-          and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 text-gray-50">
+      <div className="flex justify-center items-center min-h-screen p-10">
+        {isStart && <StartScreen handleStart={onStartQuiz} />}
+        {!isStart && <QuizScreen handleFinish={onFinishQuiz} />}
+      </div>
     </div>
   );
 }
