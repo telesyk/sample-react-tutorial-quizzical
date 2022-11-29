@@ -3,21 +3,16 @@ module.exports = {
     browser: true,
     es2021: true,
   },
-  extends: [
-    'plugin:react/recommended',
-    'airbnb',
-    'prettier',
-  ],
-  overrides: [
-  ],
+  extends: ["plugin:react/recommended", "airbnb", "prettier"],
+  overrides: [],
   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
+    ecmaVersion: "latest",
+    sourceType: "module",
   },
-  plugins: [
-    'react',
-  ],
+  plugins: ["react"],
   rules: {
-    'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
+    "react/jsx-filename-extension": [1, { extensions: [".js", ".jsx"] }],
+    "react/no-danger": 0,
+    camelcase: 0,
   },
 };
