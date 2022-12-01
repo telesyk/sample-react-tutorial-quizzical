@@ -4,8 +4,13 @@ import StartScreen from "./components/StartScreen";
 import LoadingScreen from "./components/LoadingScreen";
 import QuizScreen from "./components/QuizScreen";
 import { extendQuestionsWithAnswers } from "./helpers";
+import {
+  QUIZ_API,
+  QUESTIONS_AMOUNT,
+  CATEGORIES,
+  DIFFICULTIES,
+} from "./constants";
 
-const QUIZ_API = "https://opentdb.com/api.php?amount=10";
 // https://opentdb.com/api.php?amount=10
 // Category loopup
 // https://opentdb.com/api_category.php
@@ -17,11 +22,26 @@ function App() {
   const [isStart, setStart] = useState(true);
   const [isQuizResults, setQuizResult] = useState(false);
   const [score, setScore] = useState(0);
+  const [selectedAmount, setAmount] = useState(QUESTIONS_AMOUNT[0]);
+  const [selectedCategory, setCategory] = useState(null);
+  const [selectedDifficulty, setDifficulty] = useState(null);
+
+  const handleAmountChange = (amount) => setAmount(amount);
+
+  const handleCategoryChange = (category) => setCategory(category);
+
+  const handleDifficultyChange = (difficulty) => setDifficulty(difficulty);
 
   const onStartQuiz = () => {
+    const category = !selectedCategory ? "" : `&category=${selectedCategory}`;
+    const difficulty = !selectedDifficulty
+      ? ""
+      : `&difficulty=${selectedDifficulty}`;
+    const fetchApi = QUIZ_API + selectedAmount + category + difficulty;
+
     setScore(0);
     setStart((prevState) => !prevState);
-    fetch(QUIZ_API)
+    fetch(fetchApi)
       .then((res) => res.json())
       .then((jsonData) => {
         if (jsonData)
@@ -97,7 +117,17 @@ function App() {
   return (
     <div className="bg-purple-500 bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 text-gray-50">
       <div className="flex justify-center items-center min-h-screen p-10">
-        {isStart && <StartScreen handleStart={onStartQuiz} />}
+        {isStart && (
+          <StartScreen
+            categories={CATEGORIES}
+            questionsAmount={QUESTIONS_AMOUNT}
+            difficulties={DIFFICULTIES}
+            handleStart={onStartQuiz}
+            handleAmountChange={handleAmountChange}
+            handleCategoryChange={handleCategoryChange}
+            handleDifficultyChange={handleDifficultyChange}
+          />
+        )}
         {!isStart && (!questions || !questions.length > 0) && <LoadingScreen />}
         {!isStart && questions.length > 0 && (
           <QuizScreen

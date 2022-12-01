@@ -1,6 +1,5 @@
 /* eslint-disable no-plusplus */
 /* eslint-disable no-param-reassign */
-/* eslint-disable import/prefer-default-export */
 import { nanoid } from "nanoid";
 
 function getShuffledArray(array) {

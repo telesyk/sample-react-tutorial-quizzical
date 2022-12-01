@@ -24,7 +24,6 @@ export default function QuizScreen({
   return (
     <div className="container">
       <div className="p-10 shadow-lg rounded-lg backdrop-blur-sm bg-white/30">
-        <p className="mb-4">The questions</p>
         <div className="flex flex-wrap">
           {questions.map((item) => (
             <Quiz
@@ -51,8 +50,10 @@ export default function QuizScreen({
                 Your score is: <strong>{textScore}</strong>
               </p>
               <p className="py-1">
-                Total result: <strong>{score}/</strong>
-                {questions.length}
+                Total result:{" "}
+                <strong>
+                  {score}/{questions.length}
+                </strong>
               </p>
             </div>
             <button
