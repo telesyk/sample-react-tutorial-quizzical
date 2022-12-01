@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-disable react/prop-types */
 import React from "react";
 import Quiz from "./Quiz";
@@ -10,9 +11,15 @@ export default function QuizScreen({
   isShowedResults,
   score,
 }) {
+  const scoreGrad = questions.length / 2;
   const textScore =
-    // eslint-disable-next-line no-nested-ternary
-    score < 5 ? "low" : score >= 5 && score < 10 ? "good" : "best";
+    score === 0
+      ? "worst 💩"
+      : score < scoreGrad
+      ? "low 🤔"
+      : score >= scoreGrad && score < questions.length
+      ? "good 👍"
+      : "best 🤩";
 
   return (
     <div className="container">
