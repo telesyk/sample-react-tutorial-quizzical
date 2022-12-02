@@ -11,12 +11,6 @@ import {
   DIFFICULTIES,
 } from "./constants";
 
-// https://opentdb.com/api.php?amount=10
-// Category loopup
-// https://opentdb.com/api_category.php
-// Global Question Count Lookup: Returns the number of ALL questions in the database.
-// https://opentdb.com/api_count_global.php
-
 function App() {
   const [questions, setQuestions] = useState([]);
   const [isStart, setStart] = useState(true);
